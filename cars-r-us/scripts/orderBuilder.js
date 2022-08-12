@@ -1,9 +1,10 @@
-import { getColors, getCustomOrders, getPackages, getSeats, getWheels } from "./database.js"
+import { getColors, getCustomOrders, getChassis, getPackages, getSeats, getWheels } from "./database.js"
 
 let theColors = getColors()
 let theWheels = getWheels()
 let theOptions = getPackages()
 let theSeats = getSeats()
+let theChassis = getChassis()
 
 const buildOrderListItem = (order) => {
     const chosenColor = theColors.find(
@@ -19,7 +20,12 @@ const buildOrderListItem = (order) => {
     const chosenSeat = theSeats.find((chosenSeat) => {
         return chosenSeat.id === order.seatId
     })
+    const chosenChassis = theChassis.find((chosenChassis) => {
+        return chosenChassis.id === order.chassisId
+    })
     let totalPrice = chosenColor.price + chosenWheel.price + chosenOption.price + chosenSeat.price
+    let multiplier = chosenChassis.multiplier
+    totalPrice = totalPrice * multiplier
     return `<li> Order ${order.id} costs $ ${totalPrice}`
 }
 

@@ -3,13 +3,35 @@ import { optionList } from "./options.js"
 import { seatList } from "./seats.js"
 import { wheelList } from "./wheels.js"
 import { Orders } from "./orderBuilder.js"
-import { addCustomOrder } from "./database.js"
+import { addCustomOrder, getChassis, setFrame} from "./database.js"
 
-let theOrders = Orders()
+let theChassis = getChassis()
 let theColors = colorList()
 let theWheels = wheelList()
 let theOptions = optionList()
 let theSeats = seatList()
+
+
+let frameHTML = `<select id="chassis">
+<option value="0">Prompt to select style...</option>`
+export const frameList = () => {
+    for (const frame of theChassis) {
+        frameHTML += `<option value="${frame.id}">${frame.model}</option>`
+    }
+    frameHTML += `</select>
+    </ul>`
+    return frameHTML
+}
+let theFrames = frameList()
+document.addEventListener(
+    "change",
+    (changeEvent) => {
+        if (changeEvent.target.id === "chassis") {
+            console.log(changeEvent.target.value)  // "1" or "2"
+            setFrame(parseInt(changeEvent.target.value))
+        }
+    }
+)
 
 document.addEventListener(
     "click",
@@ -24,7 +46,9 @@ document.addEventListener(
 export const htmlBuilder = () => {
     return `
         <h1>Stan S. Stanman's Custom Automobile Builder </h1>
-
+    <article class="chassis">
+    <section class="Chassis">
+    <h2>Body Style</h2> ${theFrames}
         <article class="choices">
             <section class="choices__Colors options">
                 <h2>Exterior Paint Colors</h2> ${theColors}    

@@ -1,10 +1,10 @@
 const database = {
     colors: [
-        { id: 1, color: "Silver", price: 111.11 },
-        { id: 2, color: "Midnight Blue", price: 465.46 },
-        { id: 3, color: "Firebrick Red", price: 467.96 },
-        { id: 4, color: "Spring Green", price: 434.12 },
-        { id: 5, color: "Goldenrod", price: 777 }
+        { id: 1, color: "Silver", price: 1101.11 },
+        { id: 2, color: "Midnight Blue", price: 4065.46 },
+        { id: 3, color: "Firebrick Red", price: 4607.96 },
+        { id: 4, color: "Spring Green", price: 4034.12 },
+        { id: 5, color: "Goldenrod", price: 7077 }
     ],
     packages: [
         { id: 1, name: "Basic Package (basic sound system)", price: 111.11 },
@@ -24,14 +24,22 @@ const database = {
         { id: 3, choice: "18-inch Silver Polished Spokes", price: 333.33 },
         { id: 4, choice: "18-inch Black Matte Spokes", price: 444.44 }
     ],
+    chassis: [
+        { id: 1, model: "Car", multiplier: 1 },
+        { id: 2, model: "SUV", multiplier: 1.5 },
+        { id: 3, model: "Truck", multiplier: 2.25 },
+    ],
     orderMaker: {},
     carConstructor: [
-        { id: 1, colorId: 1, technologyId: 1, seatId: 1, wheelId: 1 }
+        { id: 1, colorId: 1, technologyId: 1, seatId: 1, wheelId: 1, chassisId: 1 }
     ]
 }
 
 export const getColors = () => {
     return database.colors.map(color => ({ ...color }))
+}
+export const getChassis = () => {
+    return database.chassis.map(chassis => ({ ...chassis }))
 }
 export const getCustomOrders = () => {
     return database.carConstructor.map(order => ({ ...order }))
@@ -47,6 +55,9 @@ export const getWheels = () => {
 }
 export const setColor = (cId) => {
     database.orderMaker.colorId = cId
+}
+export const setFrame = (fId) => {
+    database.orderMaker.chassisId = fId
 }
 export const setTechnology = (tId) => {
     database.orderMaker.technologyId = tId
