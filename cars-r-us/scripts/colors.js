@@ -4,6 +4,7 @@ let colors = getColors()
 
 let colorHTML = `<select id="paint">
 <option value="0">Prompt to select paint...</option>`
+
 export const colorList = () => {
     for (const color of colors) {
         colorHTML += `<option value="${color.id}">${color.color}</option>`
